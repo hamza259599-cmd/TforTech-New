@@ -29,6 +29,9 @@ import AdminProducts from "./pages/AdminProducts/AdminProducts";
 import AdminWhatsApp from "./pages/AdminWhatsApp/AdminWhatsApp";
 import AdminTheme from "./pages/AdminTheme/AdminTheme";
 import AdminReviews from "./pages/AdminReviews/AdminReviews";
+import AdminUsers from "./pages/AdminUsers/AdminUsers";
+import AdminBlog from "./pages/AdminBlog/AdminBlog";
+import BlogPostDetails from "./pages/BlogPostDetails/BlogPostDetails";
 
 import CustomerReviews from "./pages/CustomerReviews/CustomerReviews";
 
@@ -72,6 +75,11 @@ function App() {
               <Route
                 path="/blogging"
                 element={<Blogging />}
+              />
+
+              <Route
+                path="/blogging/:slug"
+                element={<BlogPostDetails />}
               />
 
 
@@ -301,6 +309,34 @@ function App() {
                 element={
                   <ProtectedRoute adminOnly>
                     <AdminTheme />
+                  </ProtectedRoute>
+                }
+              />
+
+
+              {/* =========================
+                  ADMIN USERS
+              ========================== */}
+
+              <Route
+                path="/admin/users"
+                element={
+                  <ProtectedRoute adminOnly>
+                    <AdminUsers />
+                  </ProtectedRoute>
+                }
+              />
+
+
+              {/* =========================
+                  ADMIN BLOG
+              ========================== */}
+
+              <Route
+                path="/admin/blog"
+                element={
+                  <ProtectedRoute adminOnly>
+                    <AdminBlog />
                   </ProtectedRoute>
                 }
               />
