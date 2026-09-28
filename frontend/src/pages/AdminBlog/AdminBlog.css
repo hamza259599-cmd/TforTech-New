@@ -1,0 +1,872 @@
+/* =========================================================
+   ADMIN PRODUCTS PAGE
+   ========================================================= */
+
+.admin-blog-page {
+  --admin-blog-primary: #2563eb;
+  --admin-blog-primary-dark: #1d4ed8;
+  --admin-blog-primary-soft: #eff6ff;
+  --admin-blog-primary-soft-hover: #dbeafe;
+
+  --admin-blog-page-background: #f6f8fb;
+  --admin-blog-surface: #ffffff;
+  --admin-blog-image-surface: #f8fafc;
+  --admin-blog-text: #101828;
+  --admin-blog-heading: #111827;
+  --admin-blog-body-text: #667085;
+  --admin-blog-label-text: #344054;
+  --admin-blog-muted: #98a2b3;
+
+  --admin-blog-border: #e4e7ec;
+  --admin-blog-border-dark: #d0d5dd;
+  --admin-blog-divider: #eaecf0;
+
+  --admin-blog-button-text: #ffffff;
+
+  min-height: 100vh;
+  background: var(--admin-blog-page-background);
+  color: var(--admin-blog-text);
+}
+
+/* =========================================================
+   ACTIVE CUSTOM THEME
+   ========================================================= */
+
+body.gojuniors-theme-active .admin-blog-page {
+  --admin-blog-primary: var(
+    --gojuniors-primary-color,
+    #2563eb
+  );
+
+  --admin-blog-primary-dark: color-mix(
+    in srgb,
+    var(--gojuniors-primary-color, #2563eb) 82%,
+    #000000
+  );
+
+  --admin-blog-primary-soft: color-mix(
+    in srgb,
+    var(--gojuniors-primary-color, #2563eb) 10%,
+    var(--gojuniors-background-color, #ffffff)
+  );
+
+  --admin-blog-primary-soft-hover: color-mix(
+    in srgb,
+    var(--gojuniors-primary-color, #2563eb) 18%,
+    var(--gojuniors-background-color, #ffffff)
+  );
+
+  --admin-blog-page-background: var(
+    --gojuniors-surface-color,
+    #f6f8fb
+  );
+
+  --admin-blog-surface: var(
+    --gojuniors-background-color,
+    #ffffff
+  );
+
+  --admin-blog-image-surface: color-mix(
+    in srgb,
+    var(--gojuniors-surface-color, #f6f8fb) 72%,
+    var(--gojuniors-background-color, #ffffff)
+  );
+
+  --admin-blog-text: var(
+    --gojuniors-text-color,
+    #101828
+  );
+
+  --admin-blog-heading: var(
+    --gojuniors-text-color,
+    #111827
+  );
+
+  --admin-blog-body-text: var(
+    --gojuniors-muted-text-color,
+    #667085
+  );
+
+  --admin-blog-label-text: color-mix(
+    in srgb,
+    var(--gojuniors-text-color, #101828) 78%,
+    var(--gojuniors-background-color, #ffffff)
+  );
+
+  --admin-blog-muted: color-mix(
+    in srgb,
+    var(--gojuniors-muted-text-color, #98a2b3) 72%,
+    var(--gojuniors-background-color, #ffffff)
+  );
+
+  --admin-blog-border: var(
+    --gojuniors-border-color,
+    #e4e7ec
+  );
+
+  --admin-blog-border-dark: var(
+    --gojuniors-border-color,
+    #d0d5dd
+  );
+
+  --admin-blog-divider: color-mix(
+    in srgb,
+    var(--gojuniors-border-color, #eaecf0) 82%,
+    var(--gojuniors-background-color, #ffffff)
+  );
+
+  --admin-blog-button-text: var(
+    --gojuniors-button-text-color,
+    #ffffff
+  );
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.admin-blog-main {
+  padding: 50px 24px 80px;
+}
+
+.admin-blog-container {
+  width: min(1400px, 100%);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.admin-blog-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 32px;
+}
+
+.admin-blog-eyebrow,
+.admin-blog-section-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--admin-blog-primary);
+}
+
+.admin-blog-header h1 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--admin-blog-heading);
+}
+
+.admin-blog-header p {
+  max-width: 650px;
+  margin: 12px 0 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--admin-blog-body-text);
+}
+
+.admin-blog-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.admin-blog-dashboard-button,
+.admin-blog-add-button,
+.admin-blog-secondary-button,
+.admin-blog-submit-button,
+.admin-blog-cancel-button {
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.admin-blog-dashboard-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  background: var(--admin-blog-surface);
+  color: var(--admin-blog-label-text);
+  border: 1px solid var(--admin-blog-border-dark);
+  text-decoration: none;
+}
+
+.admin-blog-dashboard-button:hover {
+  background: var(--admin-blog-primary-soft);
+}
+
+.admin-blog-add-button {
+  min-height: 46px;
+  padding: 0 20px;
+  background: var(--admin-blog-primary);
+  color: var(--admin-blog-button-text);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+.admin-blog-add-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
+}
+
+.admin-blog-dashboard-button:disabled,
+.admin-blog-add-button:disabled,
+.admin-blog-secondary-button:disabled,
+.admin-blog-submit-button:disabled,
+.admin-blog-cancel-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* =========================================================
+   MESSAGES
+   Semantic success/error colors remain unchanged
+   ========================================================= */
+
+.admin-blog-success,
+.admin-blog-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 15px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.admin-blog-success {
+  background: #ecfdf3;
+  border: 1px solid #abefc6;
+  color: #067647;
+}
+
+.admin-blog-error {
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  color: #b42318;
+}
+
+.admin-blog-error strong {
+  font-size: 15px;
+}
+
+/* =========================================================
+   FORM SECTION
+   ========================================================= */
+
+.admin-blog-form-section {
+  margin-bottom: 38px;
+  padding: 30px;
+  background: var(--admin-blog-surface);
+  border: 1px solid var(--admin-blog-border);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.06);
+}
+
+.admin-blog-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--admin-blog-divider);
+}
+
+.admin-blog-form-header h2,
+.admin-blog-list-header h2 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--admin-blog-heading);
+}
+
+.admin-blog-cancel-button {
+  min-height: 42px;
+  padding: 0 17px;
+  background: var(--admin-blog-surface);
+  color: var(--admin-blog-label-text);
+  border: 1px solid var(--admin-blog-border-dark);
+}
+
+.admin-blog-cancel-button:hover {
+  background: var(--admin-blog-primary-soft);
+}
+
+.admin-blog-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-blog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-blog-field-wide {
+  grid-column: 1 / -1;
+}
+
+.admin-blog-field label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--admin-blog-label-text);
+}
+
+.admin-blog-field input,
+.admin-blog-field select,
+.admin-blog-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--admin-blog-border-dark);
+  border-radius: 9px;
+  background: var(--admin-blog-surface);
+  color: var(--admin-blog-text);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-blog-field input,
+.admin-blog-field select {
+  min-height: 46px;
+  padding: 0 13px;
+}
+
+.admin-blog-field textarea {
+  min-height: 130px;
+  padding: 13px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.admin-blog-field input::placeholder,
+.admin-blog-field textarea::placeholder {
+  color: var(--admin-blog-muted);
+}
+
+.admin-blog-field input:focus,
+.admin-blog-field select:focus,
+.admin-blog-field textarea:focus {
+  border-color: var(--admin-blog-primary);
+
+  box-shadow: 0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--admin-blog-primary) 12%,
+      transparent
+    );
+}
+
+/* =========================================================
+   SPECIFICATIONS
+   ========================================================= */
+
+.admin-blog-specifications {
+  margin-top: 30px;
+  padding-top: 28px;
+  border-top: 1px solid var(--admin-blog-divider);
+}
+
+.admin-blog-specifications-heading {
+  margin-bottom: 20px;
+}
+
+.admin-blog-specifications-heading h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--admin-blog-heading);
+}
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.admin-blog-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--admin-blog-divider);
+}
+
+.admin-blog-secondary-button {
+  min-height: 46px;
+  padding: 0 20px;
+  background: var(--admin-blog-surface);
+  color: var(--admin-blog-label-text);
+  border: 1px solid var(--admin-blog-border-dark);
+}
+
+.admin-blog-secondary-button:hover {
+  background: var(--admin-blog-primary-soft);
+}
+
+.admin-blog-submit-button {
+  min-height: 46px;
+  min-width: 150px;
+  padding: 0 22px;
+  background: var(--admin-blog-primary);
+  color: var(--admin-blog-button-text);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.16);
+}
+
+.admin-blog-submit-button:hover {
+  background: var(--admin-blog-primary-dark);
+}
+
+/* =========================================================
+   PRODUCT LIST HEADER
+   ========================================================= */
+
+.admin-blog-list-section {
+  margin-top: 10px;
+}
+
+.admin-blog-list-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.admin-blog-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  background: var(--admin-blog-surface);
+  border: 1px solid var(--admin-blog-border);
+  border-radius: 9px;
+  color: var(--admin-blog-body-text);
+  font-size: 14px;
+}
+
+.admin-blog-count strong {
+  color: var(--admin-blog-heading);
+  font-size: 18px;
+}
+
+/* =========================================================
+   PRODUCTS GRID
+   ========================================================= */
+
+.admin-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.admin-post-card {
+  overflow: hidden;
+  background: var(--admin-blog-surface);
+  border: 1px solid var(--admin-blog-border);
+  border-radius: 16px;
+  box-shadow: 0 7px 22px rgba(16, 24, 40, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(16, 24, 40, 0.09);
+}
+
+.admin-post-card-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  padding: 20px;
+  background: var(--admin-blog-image-surface);
+  border-bottom: 1px solid var(--admin-blog-divider);
+}
+
+.admin-post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.admin-post-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 58px;
+  color: var(--admin-blog-muted);
+}
+
+.admin-post-condition {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--admin-blog-surface);
+  border: 1px solid var(--admin-blog-border);
+  color: var(--admin-blog-label-text);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-post-card-content {
+  padding: 20px;
+}
+
+.admin-post-category {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--admin-blog-primary);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.admin-post-card-content h3 {
+  margin: 0;
+  min-height: 50px;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--admin-blog-heading);
+}
+
+.admin-post-card-content > p {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: 44px;
+  margin: 9px 0 16px;
+  color: var(--admin-blog-body-text);
+  font-size: 13px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.admin-post-price {
+  margin-bottom: 16px;
+  color: var(--admin-blog-heading);
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.admin-post-stock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 11px 12px;
+  background: var(--admin-blog-image-surface);
+  border-radius: 8px;
+  color: var(--admin-blog-body-text);
+  font-size: 13px;
+}
+
+.admin-post-stock-row strong {
+  font-size: 13px;
+}
+
+.admin-stock-available {
+  color: #067647;
+}
+
+.admin-stock-out {
+  color: #b42318;
+}
+
+/* =========================================================
+   PRODUCT ACTIONS
+   ========================================================= */
+
+.admin-post-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.admin-post-actions button {
+  min-height: 40px;
+  padding: 0 8px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.admin-post-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.admin-post-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.admin-post-edit-button {
+  background: var(--admin-blog-primary-soft);
+  color: var(--admin-blog-primary-dark);
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--admin-blog-primary) 24%,
+      var(--admin-blog-border)
+    );
+}
+
+.admin-post-edit-button:hover {
+  background: var(--admin-blog-primary-soft-hover);
+}
+
+.admin-post-stock-button {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.admin-post-stock-button:hover {
+  background: #dcfce7;
+}
+
+.admin-post-delete-button {
+  background: #fef2f2;
+  color: #b42318;
+  border: 1px solid #fecaca;
+}
+
+.admin-post-delete-button:hover {
+  background: #fee2e2;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.admin-blog-empty {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 320px;
+  padding: 40px 20px;
+  background: var(--admin-blog-surface);
+  border: 1px solid var(--admin-blog-border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.admin-blog-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 18px;
+  background: var(--admin-blog-primary-soft);
+  border-radius: 50%;
+  font-size: 32px;
+}
+
+.admin-blog-empty h3 {
+  margin: 0;
+  font-size: 22px;
+  color: var(--admin-blog-heading);
+}
+
+.admin-blog-empty p {
+  max-width: 480px;
+  margin: 9px 0 20px;
+  color: var(--admin-blog-body-text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.admin-blog-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 550px;
+  text-align: center;
+}
+
+.admin-blog-loading h2 {
+  margin: 18px 0 7px;
+  color: var(--admin-blog-heading);
+}
+
+.admin-blog-loading p {
+  margin: 0;
+  color: var(--admin-blog-body-text);
+}
+
+.admin-blog-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid #dbeafe;
+  border-top-color: var(--admin-blog-primary);
+  border-radius: 50%;
+  animation: adminBlogSpin 0.8s linear infinite;
+}
+
+@keyframes adminBlogSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .admin-blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .admin-blog-main {
+    padding: 35px 18px 60px;
+  }
+
+  .admin-blog-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-blog-header-actions {
+    width: 100%;
+  }
+
+  .admin-blog-dashboard-button,
+  .admin-blog-add-button {
+    flex: 1;
+  }
+
+  .admin-blog-form-section {
+    padding: 22px;
+  }
+
+  .admin-blog-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-blog-field-wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .admin-blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-blog-header h1 {
+    font-size: 32px;
+  }
+
+  .admin-blog-header-actions {
+    flex-direction: column;
+  }
+
+  .admin-blog-dashboard-button,
+  .admin-blog-add-button {
+    width: 100%;
+    flex: none;
+  }
+
+  .admin-blog-list-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-blog-form-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-blog-form-header .admin-blog-cancel-button {
+    width: 100%;
+  }
+
+  .admin-blog-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .admin-blog-secondary-button,
+  .admin-blog-submit-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-blog-main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .admin-blog-form-section {
+    padding: 17px;
+    border-radius: 12px;
+  }
+
+  .admin-post-card-content {
+    padding: 16px;
+  }
+
+  .admin-post-actions {
+    grid-template-columns: 1fr;
+  }
+}
