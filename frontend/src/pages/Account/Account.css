@@ -7,23 +7,12 @@
   background: #f5f7fb;
   color: #1f2937;
   padding: 40px 20px;
-
-  /*
-    Theme variables are available globally through
-    ThemeContext. Existing colors remain the defaults
-    until a custom theme is saved.
-  */
 }
 
 .account-container {
   max-width: 1000px;
   margin: 0 auto;
 }
-
-
-/* =========================================================
-   ACCOUNT HEADER
-========================================================= */
 
 .account-header {
   background: #ffffff;
@@ -45,11 +34,6 @@
   font-size: 15px;
 }
 
-
-/* =========================================================
-   ACCOUNT CARD
-========================================================= */
-
 .account-card {
   background: #ffffff;
   border-radius: 16px;
@@ -63,11 +47,6 @@
   color: #1f2937;
   font-size: 22px;
 }
-
-
-/* =========================================================
-   PROFILE HEADING
-========================================================= */
 
 .account-profile-heading {
   display: flex;
@@ -87,11 +66,6 @@
   font-size: 14px;
   line-height: 1.5;
 }
-
-
-/* =========================================================
-   EDIT PROFILE BUTTON
-========================================================= */
 
 .account-edit-btn {
   flex-shrink: 0;
@@ -119,11 +93,6 @@
   transform: translateY(0);
 }
 
-
-/* =========================================================
-   SUCCESS / ERROR MESSAGES
-========================================================= */
-
 .account-success-message {
   margin-bottom: 20px;
   padding: 12px 15px;
@@ -145,11 +114,6 @@
   font-size: 14px;
   line-height: 1.5;
 }
-
-
-/* =========================================================
-   ACCOUNT INFORMATION
-========================================================= */
 
 .account-info-item {
   padding: 16px 0;
@@ -186,11 +150,6 @@
   font-size: 13px;
   font-weight: 600;
 }
-
-
-/* =========================================================
-   PROFILE EDIT FORM
-========================================================= */
 
 .account-edit-form {
   margin-top: 10px;
@@ -246,11 +205,6 @@
   color: #6b7280;
   font-size: 12px;
 }
-
-
-/* =========================================================
-   EDIT FORM BUTTONS
-========================================================= */
 
 .account-edit-actions {
   display: flex;
@@ -313,11 +267,6 @@
   box-shadow: none;
 }
 
-
-/* =========================================================
-   ACCOUNT ACTIVITIES
-========================================================= */
-
 .account-activities {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -376,11 +325,6 @@
   box-shadow: none;
 }
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
 .account-logout-card {
   background: #ffffff;
   border-radius: 16px;
@@ -413,292 +357,109 @@
   transform: scale(0.99);
 }
 
-
-/* =========================================================
-   CUSTOM THEME
-   =========================================================
-   These rules are activated by ThemeContext only on
-   customer-facing pages.
-
-   Existing colors above remain the default appearance.
-========================================================= */
-
 body.gojuniors-theme-active .account-page {
-  background: var(
-    --gojuniors-surface-color,
-    #f5f7fb
-  );
-
-  color: var(
-    --gojuniors-text-color,
-    #1f2937
-  );
+  background: var(--gojuniors-surface-color, #f5f7fb);
+  color: var(--gojuniors-text-color, #1f2937);
 }
-
-
-/* =========================================================
-   THEME — CARDS
-========================================================= */
 
 body.gojuniors-theme-active .account-header,
 body.gojuniors-theme-active .account-card,
 body.gojuniors-theme-active .account-logout-card,
 body.gojuniors-theme-active .account-activity-btn {
-  background: var(
-    --gojuniors-background-color,
-    #ffffff
-  );
-
-  border-radius: var(
-    --gojuniors-border-radius,
-    16px
-  );
+  background: var(--gojuniors-background-color, #ffffff);
+  border-radius: var(--gojuniors-border-radius, 16px);
 }
 
 body.gojuniors-theme-active .account-activity-btn {
-  border-color: var(
-    --gojuniors-border-color,
-    #e5e7eb
-  );
+  border-color: var(--gojuniors-border-color, #e5e7eb);
 }
-
-
-/* =========================================================
-   THEME — HEADINGS
-========================================================= */
 
 body.gojuniors-theme-active .account-header h1,
 body.gojuniors-theme-active .account-card-title,
 body.gojuniors-theme-active .account-info-value,
 body.gojuniors-theme-active .account-activity-title {
-  color: var(
-    --gojuniors-text-color,
-    #1f2937
-  );
+  color: var(--gojuniors-text-color, #1f2937);
 }
-
-
-/* =========================================================
-   THEME — MUTED TEXT
-========================================================= */
 
 body.gojuniors-theme-active .account-header p,
 body.gojuniors-theme-active .account-profile-subtitle,
 body.gojuniors-theme-active .account-info-label,
 body.gojuniors-theme-active .account-form-group small,
 body.gojuniors-theme-active .account-activity-description {
-  color: var(
-    --gojuniors-muted-text-color,
-    #6b7280
-  );
+  color: var(--gojuniors-muted-text-color, #6b7280);
 }
-
-
-/* =========================================================
-   THEME — BORDERS
-========================================================= */
 
 body.gojuniors-theme-active .account-info-item,
 body.gojuniors-theme-active .account-activity-btn {
-  border-color: var(
-    --gojuniors-border-color,
-    #e5e7eb
-  );
+  border-color: var(--gojuniors-border-color, #e5e7eb);
 }
 
 body.gojuniors-theme-active .account-form-group input,
 body.gojuniors-theme-active .account-cancel-btn {
-  border-color: var(
-    --gojuniors-border-color,
-    #d1d5db
-  );
+  border-color: var(--gojuniors-border-color, #d1d5db);
 }
-
-
-/* =========================================================
-   THEME — PRIMARY BUTTONS
-========================================================= */
 
 body.gojuniors-theme-active .account-edit-btn,
 body.gojuniors-theme-active .account-save-btn {
-  background: var(
-    --gojuniors-secondary-color,
-    #2563eb
-  );
-
-  border-color: var(
-    --gojuniors-secondary-color,
-    #2563eb
-  );
-
-  color: var(
-    --gojuniors-button-text-color,
-    #ffffff
-  );
-
-  border-radius: var(
-    --gojuniors-button-radius,
-    9px
-  );
+  background: var(--gojuniors-secondary-color, #2563eb);
+  border-color: var(--gojuniors-secondary-color, #2563eb);
+  color: var(--gojuniors-button-text-color, #ffffff);
+  border-radius: var(--gojuniors-button-radius, 9px);
 }
 
 body.gojuniors-theme-active .account-edit-btn:hover,
 body.gojuniors-theme-active .account-save-btn:hover {
-  background: var(
-    --gojuniors-primary-color,
-    #1d4ed8
-  );
-
-  border-color: var(
-    --gojuniors-primary-color,
-    #1d4ed8
-  );
+  background: var(--gojuniors-primary-color, #1d4ed8);
+  border-color: var(--gojuniors-primary-color, #1d4ed8);
 }
 
-
-/* =========================================================
-   THEME — FORM
-========================================================= */
-
 body.gojuniors-theme-active .account-form-group label {
-  color: var(
-    --gojuniors-text-color,
-    #374151
-  );
+  color: var(--gojuniors-text-color, #374151);
 }
 
 body.gojuniors-theme-active .account-form-group input {
-  background: var(
-    --gojuniors-background-color,
-    #ffffff
-  );
-
-  color: var(
-    --gojuniors-text-color,
-    #111827
-  );
-
-  border-radius: var(
-    --gojuniors-button-radius,
-    9px
-  );
+  background: var(--gojuniors-background-color, #ffffff);
+  color: var(--gojuniors-text-color, #111827);
+  border-radius: var(--gojuniors-button-radius, 9px);
 }
 
 body.gojuniors-theme-active .account-form-group input:focus {
-  border-color: var(
-    --gojuniors-secondary-color,
-    #2563eb
-  );
-
-  box-shadow:
-    0 0 0 3px
-    color-mix(
-      in srgb,
-      var(--gojuniors-secondary-color, #2563eb) 10%,
-      transparent
-    );
+  border-color: var(--gojuniors-secondary-color, #2563eb);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gojuniors-secondary-color, #2563eb) 10%, transparent);
 }
 
 body.gojuniors-theme-active .account-form-group input:disabled {
-  background: var(
-    --gojuniors-surface-color,
-    #f3f4f6
-  );
-
-  color: var(
-    --gojuniors-muted-text-color,
-    #6b7280
-  );
+  background: var(--gojuniors-surface-color, #f3f4f6);
+  color: var(--gojuniors-muted-text-color, #6b7280);
 }
 
-
-/* =========================================================
-   THEME — CANCEL BUTTON
-========================================================= */
-
 body.gojuniors-theme-active .account-cancel-btn {
-  background: var(
-    --gojuniors-background-color,
-    #ffffff
-  );
-
-  color: var(
-    --gojuniors-text-color,
-    #374151
-  );
-
-  border-radius: var(
-    --gojuniors-button-radius,
-    9px
-  );
+  background: var(--gojuniors-background-color, #ffffff);
+  color: var(--gojuniors-text-color, #374151);
+  border-radius: var(--gojuniors-button-radius, 9px);
 }
 
 body.gojuniors-theme-active .account-cancel-btn:hover {
-  background: var(
-    --gojuniors-surface-color,
-    #f9fafb
-  );
-
-  border-color: var(
-    --gojuniors-secondary-color,
-    #9ca3af
-  );
+  background: var(--gojuniors-surface-color, #f9fafb);
+  border-color: var(--gojuniors-secondary-color, #9ca3af);
 }
 
-
-/* =========================================================
-   THEME — ACCOUNT ACTIVITIES
-========================================================= */
-
 body.gojuniors-theme-active .account-activity-btn:hover {
-  border-color: var(
-    --gojuniors-secondary-color,
-    #d1d5db
-  );
+  border-color: var(--gojuniors-secondary-color, #d1d5db);
 }
 
 body.gojuniors-theme-active .account-activity-btn.disabled {
-  background: var(
-    --gojuniors-surface-color,
-    #f9fafb
-  );
+  background: var(--gojuniors-surface-color, #f9fafb);
 }
-
-
-/* =========================================================
-   THEME — STATUS
-========================================================= */
 
 body.gojuniors-theme-active .account-status {
-  background: color-mix(
-    in srgb,
-    var(--gojuniors-accent-color, #d69e78) 16%,
-    var(--gojuniors-background-color, #ffffff)
-  );
-
-  color: var(
-    --gojuniors-primary-color,
-    #166534
-  );
+  background: color-mix(in srgb, var(--gojuniors-accent-color, #d69e78) 16%, var(--gojuniors-background-color, #ffffff));
+  color: var(--gojuniors-primary-color, #166534);
 }
-
-
-/* =========================================================
-   THEME — LOGOUT
-   Keep danger semantics, but integrate button radius.
-========================================================= */
 
 body.gojuniors-theme-active .account-logout-btn {
-  border-radius: var(
-    --gojuniors-button-radius,
-    10px
-  );
+  border-radius: var(--gojuniors-button-radius, 10px);
 }
-
-
-/* =========================================================
-   RESPONSIVE - TABLET
-========================================================= */
 
 @media (max-width: 768px) {
   .account-page {
@@ -730,11 +491,6 @@ body.gojuniors-theme-active .account-logout-btn {
     padding: 20px 22px;
   }
 }
-
-
-/* =========================================================
-   RESPONSIVE - MOBILE
-========================================================= */
 
 @media (max-width: 480px) {
   .account-page {
