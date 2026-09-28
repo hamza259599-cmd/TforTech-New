@@ -11,6 +11,8 @@ import {
   FaWhatsapp,
   FaPalette,
   FaStar,
+  FaUsers,
+  FaNewspaper,
 } from "react-icons/fa";
 
 import Navbar from "../../components/Navbar/Navbar";
@@ -135,6 +137,18 @@ const AdminLayout = ({ children }) => {
                 <span>WhatsApp Alerts</span>
               </NavLink>
 
+              <NavLink
+                to="/admin/blog"
+                className={({ isActive }) =>
+                  `admin-nav-link ${
+                    isActive ? "active" : ""
+                  }`
+                }
+              >
+                <FaNewspaper />
+                <span>Blog</span>
+              </NavLink>
+
               {/* ================= THEME ================= */}
 
               <NavLink
@@ -147,6 +161,18 @@ const AdminLayout = ({ children }) => {
               >
                 <FaPalette />
                 <span>Theme</span>
+              </NavLink>
+
+              <NavLink
+                to="/admin/users"
+                className={({ isActive }) =>
+                  `admin-nav-link ${
+                    isActive ? "active" : ""
+                  }`
+                }
+              >
+                <FaUsers />
+                <span>Users</span>
               </NavLink>
             </div>
 
