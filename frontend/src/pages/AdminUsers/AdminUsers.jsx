@@ -15,6 +15,7 @@ function AdminUsers() {
   const [error, setError] = useState("");
   const [updatingUserId, setUpdatingUserId] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [emailSearch, setEmailSearch] = useState("");
 
   const currentUserId = localStorage.getItem("tfortech_user_id");
 
@@ -176,6 +177,24 @@ function AdminUsers() {
   };
 
   // =========================================================
+  // EMAIL SEARCH (find a user by email and grant/remove admin)
+  // =========================================================
+
+  const normalizedSearch = emailSearch.trim().toLowerCase();
+
+  const filteredUsers = normalizedSearch
+    ? users.filter((u) => {
+        const email = (u.email || "").toLowerCase();
+        const name = (u.full_name || "").toLowerCase();
+        return email.includes(normalizedSearch) || name.includes(normalizedSearch);
+      })
+    : users;
+
+  const exactEmailMatch = normalizedSearch
+    ? users.some((u) => (u.email || "").toLowerCase() === normalizedSearch)
+    : false;
+
+  // =========================================================
   // LOADING STATE
   // =========================================================
 
@@ -237,6 +256,28 @@ function AdminUsers() {
             </div>
           )}
 
+          {users.length > 0 && (
+            <section className="admin-users-search">
+              <label htmlFor="admin-users-email-search" className="admin-users-search-label">
+                Find a user by email or name
+              </label>
+              <input
+                id="admin-users-email-search"
+                type="text"
+                className="admin-users-search-input"
+                placeholder="e.g. someone@example.com"
+                value={emailSearch}
+                onChange={(e) => setEmailSearch(e.target.value)}
+              />
+              {normalizedSearch && !exactEmailMatch && (
+                <p className="admin-users-search-hint">
+                  No registered user matches "{emailSearch}" yet. They'll show up here
+                  once they sign up — you can grant admin at that point.
+                </p>
+              )}
+            </section>
+          )}
+
           {!error && users.length === 0 && (
             <section className="admin-users-empty">
               <div className="admin-users-empty-icon">👤</div>
@@ -245,7 +286,15 @@ function AdminUsers() {
             </section>
           )}
 
-          {users.length > 0 && (
+          {users.length > 0 && filteredUsers.length === 0 && (
+            <section className="admin-users-empty">
+              <div className="admin-users-empty-icon">🔍</div>
+              <h2>No Matches</h2>
+              <p>No registered user matches that search.</p>
+            </section>
+          )}
+
+          {filteredUsers.length > 0 && (
             <section className="admin-users-table-wrapper">
               <table className="admin-users-table">
                 <thead>
@@ -258,7 +307,7 @@ function AdminUsers() {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((u) => (
+                  {filteredUsers.map((u) => (
                     <tr key={u.id}>
                       <td>{u.full_name || "N/A"}</td>
                       <td>{u.email || "N/A"}</td>
