@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AdminLayout from "../AdminLayout/AdminLayout";
@@ -6,6 +6,8 @@ import AdminLayout from "../AdminLayout/AdminLayout";
 import "./AdminBlog.css";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000";
+
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 const EMPTY_FORM = {
   title: "",
@@ -20,6 +22,8 @@ const EMPTY_FORM = {
 function AdminBlog() {
   const navigate = useNavigate();
 
+  const imageInputRef = useRef(null);
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -29,6 +33,9 @@ function AdminBlog() {
   const [editingPostId, setEditingPostId] = useState("");
   const [form, setForm] = useState(EMPTY_FORM);
   const [showForm, setShowForm] = useState(false);
+
+  const [imageSource, setImageSource] = useState("url");
+  const [selectedImageName, setSelectedImageName] = useState("");
 
   // =========================================================
   // AUTHENTICATION FAILURE
@@ -136,10 +143,104 @@ function AdminBlog() {
     }));
   };
 
+  // =========================================================
+  // IMAGE SOURCE
+  // =========================================================
+
+  const handleImageSourceChange = (source) => {
+    setImageSource(source);
+    setError("");
+
+    if (source === "url") {
+      setSelectedImageName("");
+
+      if (imageInputRef.current) {
+        imageInputRef.current.value = "";
+      }
+    } else {
+      setForm((currentForm) => ({
+        ...currentForm,
+        image: "",
+      }));
+    }
+  };
+
+  // =========================================================
+  // IMAGE GALLERY
+  // =========================================================
+
+  const handleGalleryImageChange = (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    setError("");
+
+    if (!file.type.startsWith("image/")) {
+      setError("Please select a valid image file.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      setError("Image size must be 5 MB or smaller.");
+      event.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (typeof reader.result !== "string") {
+        setError("Unable to process the selected image.");
+        return;
+      }
+
+      setForm((currentForm) => ({
+        ...currentForm,
+        image: reader.result,
+      }));
+
+      setSelectedImageName(file.name);
+      setImageSource("gallery");
+    };
+
+    reader.onerror = () => {
+      setError("Unable to read the selected image. Please try again.");
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  // =========================================================
+  // CLEAR IMAGE
+  // =========================================================
+
+  const handleClearImage = () => {
+    setForm((currentForm) => ({
+      ...currentForm,
+      image: "",
+    }));
+
+    setSelectedImageName("");
+
+    if (imageInputRef.current) {
+      imageInputRef.current.value = "";
+    }
+  };
+
   const resetForm = () => {
     setForm(EMPTY_FORM);
     setEditingPostId("");
     setShowForm(false);
+    setImageSource("url");
+    setSelectedImageName("");
+
+    if (imageInputRef.current) {
+      imageInputRef.current.value = "";
+    }
   };
 
   const handleAddPost = () => {
@@ -147,6 +248,13 @@ function AdminBlog() {
     setSuccessMessage("");
     setForm(EMPTY_FORM);
     setEditingPostId("");
+    setImageSource("url");
+    setSelectedImageName("");
+
+    if (imageInputRef.current) {
+      imageInputRef.current.value = "";
+    }
+
     setShowForm(true);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
@@ -164,6 +272,13 @@ function AdminBlog() {
       content: post.content || "",
       is_published: post.is_published !== false,
     });
+
+    setImageSource("url");
+    setSelectedImageName("");
+
+    if (imageInputRef.current) {
+      imageInputRef.current.value = "";
+    }
 
     setEditingPostId(post.id);
     setShowForm(true);
@@ -471,16 +586,222 @@ function AdminBlog() {
                       />
                     </div>
 
+                    {/* =========================================
+                        COVER IMAGE
+                        ========================================= */}
+
                     <div className="admin-blog-field admin-blog-field-wide">
-                      <label htmlFor="image">Cover Image URL</label>
-                      <input
-                        id="image"
-                        name="image"
-                        type="url"
-                        value={form.image}
-                        onChange={handleInputChange}
-                        placeholder="https://example.com/cover.jpg"
-                      />
+                      <label>Cover Image</label>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "10px",
+                          marginBottom: "14px",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => handleImageSourceChange("url")}
+                          disabled={saving}
+                          style={{
+                            padding: "10px 18px",
+                            borderRadius: "8px",
+                            border:
+                              imageSource === "url"
+                                ? "2px solid #111827"
+                                : "1px solid #d1d5db",
+                            background:
+                              imageSource === "url" ? "#111827" : "#ffffff",
+                            color:
+                              imageSource === "url" ? "#ffffff" : "#374151",
+                            cursor: "pointer",
+                            fontWeight: 600,
+                          }}
+                        >
+                          Image URL
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => handleImageSourceChange("gallery")}
+                          disabled={saving}
+                          style={{
+                            padding: "10px 18px",
+                            borderRadius: "8px",
+                            border:
+                              imageSource === "gallery"
+                                ? "2px solid #111827"
+                                : "1px solid #d1d5db",
+                            background:
+                              imageSource === "gallery"
+                                ? "#111827"
+                                : "#ffffff",
+                            color:
+                              imageSource === "gallery"
+                                ? "#ffffff"
+                                : "#374151",
+                            cursor: "pointer",
+                            fontWeight: 600,
+                          }}
+                        >
+                          Choose from Gallery
+                        </button>
+                      </div>
+
+                      {imageSource === "url" && (
+                        <input
+                          id="image"
+                          name="image"
+                          type="url"
+                          value={form.image}
+                          onChange={handleInputChange}
+                          placeholder="https://example.com/cover.jpg"
+                          disabled={saving}
+                        />
+                      )}
+
+                      {imageSource === "gallery" && (
+                        <div
+                          style={{
+                            border: "1px dashed #cbd5e1",
+                            borderRadius: "12px",
+                            padding: "18px",
+                            background: "#f8fafc",
+                          }}
+                        >
+                          <input
+                            ref={imageInputRef}
+                            id="blog-gallery-image"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleGalleryImageChange}
+                            disabled={saving}
+                            style={{ display: "none" }}
+                          />
+
+                          <button
+                            type="button"
+                            onClick={() => imageInputRef.current?.click()}
+                            disabled={saving}
+                            style={{
+                              width: "100%",
+                              padding: "14px 18px",
+                              borderRadius: "10px",
+                              border: "1px solid #d1d5db",
+                              background: "#ffffff",
+                              color: "#111827",
+                              cursor: "pointer",
+                              fontWeight: 600,
+                              fontSize: "14px",
+                            }}
+                          >
+                            📁 Choose Image from Gallery
+                          </button>
+
+                          <p
+                            style={{
+                              margin: "10px 0 0",
+                              fontSize: "13px",
+                              color: "#64748b",
+                              textAlign: "center",
+                            }}
+                          >
+                            JPG, JPEG, PNG, WEBP and other image formats up to
+                            5 MB.
+                          </p>
+
+                          {selectedImageName && (
+                            <div
+                              style={{
+                                marginTop: "12px",
+                                padding: "10px 12px",
+                                borderRadius: "8px",
+                                background: "#ecfdf5",
+                                color: "#166534",
+                                fontSize: "13px",
+                                wordBreak: "break-word",
+                              }}
+                            >
+                              ✓ Selected: {selectedImageName}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {form.image && (
+                        <div
+                          style={{
+                            marginTop: "16px",
+                            border: "1px solid #e5e7eb",
+                            borderRadius: "12px",
+                            padding: "14px",
+                            background: "#ffffff",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "12px",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            <strong
+                              style={{ fontSize: "14px", color: "#111827" }}
+                            >
+                              Image Preview
+                            </strong>
+
+                            <button
+                              type="button"
+                              onClick={handleClearImage}
+                              disabled={saving}
+                              style={{
+                                border: "none",
+                                background: "transparent",
+                                color: "#dc2626",
+                                cursor: "pointer",
+                                fontWeight: 600,
+                                fontSize: "13px",
+                              }}
+                            >
+                              Remove Image
+                            </button>
+                          </div>
+
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "220px",
+                              borderRadius: "10px",
+                              overflow: "hidden",
+                              background: "#f8fafc",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              border: "1px solid #e5e7eb",
+                            }}
+                          >
+                            <img
+                              src={form.image}
+                              alt="Cover preview"
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "contain",
+                              }}
+                              onError={() => {
+                                setError(
+                                  "The selected image could not be previewed. Please choose another image."
+                                );
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     <div className="admin-blog-field admin-blog-field-wide">
