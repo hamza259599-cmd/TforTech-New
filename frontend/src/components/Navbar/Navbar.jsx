@@ -21,6 +21,19 @@ const BACKEND_URL =
 const API = `${BACKEND_URL}/api`;
 
 // ============================================================
+// HEADER / FOOTER (admin-managed)
+// ============================================================
+
+const DEFAULT_HF = {
+    header: {
+          announcement_text_1: "Free shipping on orders over PKR 5,000",
+          announcement_text_2: "Pakistan & Middle East",
+          logo_text_main: "T",
+          logo_text_secondary: "For Tech",
+    },
+};
+
+// ============================================================
 // SEARCH HELPERS
 // ============================================================
 
@@ -299,6 +312,61 @@ function Navbar() {
           "admin"
     );
   }, [location.pathname]);
+
+  // ============================================================
+  // HEADER / FOOTER SETTINGS (admin-managed)
+  // ============================================================
+
+  const [headerFooter, setHeaderFooter] =
+      useState(DEFAULT_HF);
+
+  useEffect(() => {
+      let isMounted = true;
+
+      const fetchHeaderFooter = async () => {
+            try {
+                    const response = await fetch(
+                              `${API}/header-footer/public`
+                            );
+
+                    if (!response.ok) {
+                              throw new Error(
+                                          `Header/footer request failed with status ${response.status}`
+                                        );
+                    }
+
+                    const data = await response.json();
+
+                    if (!isMounted) {
+                              return;
+                    }
+
+                    setHeaderFooter({
+                              ...DEFAULT_HF,
+                              ...(data || {}),
+                              header: {
+                                          ...DEFAULT_HF.header,
+                                          ...(data?.header || {}),
+                              },
+                    });
+            } catch (error) {
+                    console.error(
+                              "Error loading header/footer settings:",
+                              error
+                            );
+
+                    if (isMounted) {
+                              setHeaderFooter(DEFAULT_HF);
+                    }
+            }
+      };
+
+      fetchHeaderFooter();
+
+      return () => {
+            isMounted = false;
+      };
+  }, []);
 
   // ==========================================================
   // CLOSE MENU
@@ -848,7 +916,7 @@ function Navbar() {
 
       <div className="announcement-bar">
         <span>
-          Free shipping on orders over PKR 5,000
+          {headerFooter.header.announcement_text_1}
         </span>
 
         <span className="announcement-divider">
@@ -856,7 +924,7 @@ function Navbar() {
         </span>
 
         <span>
-          Pakistan &amp; Middle East
+          {headerFooter.header.announcement_text_2}
         </span>
       </div>
 
@@ -876,8 +944,8 @@ function Navbar() {
             className="navbar-logo"
             onClick={closeMenu}
           >
-            T
-            <span>For Tech</span>
+            {headerFooter.header.logo_text_main}
+                                    <span>{headerFooter.header.logo_text_secondary}</span>
           </Link>
 
           {/* =================================================
