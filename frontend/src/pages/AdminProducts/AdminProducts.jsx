@@ -94,7 +94,7 @@ function AdminProducts() {
         return;
       }
 
-      const response = await fetch(`${API_URL}/api/products/`, {
+      const response = await fetch(`${API_URL}/api/products`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -469,7 +469,7 @@ function AdminProducts() {
 
       const endpoint = isEditing
         ? `${API_URL}/api/products/${editingProductId}`
-        : `${API_URL}/api/products/`;
+        : `${API_URL}/api/products`;
 
       const method = isEditing ? "PUT" : "POST";
 
