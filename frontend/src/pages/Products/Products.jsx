@@ -83,10 +83,10 @@ function ProductImage({ product }) {
 
   useEffect(() => {
     setImageError(false);
-  }, [product?.image_url, product?.image_urls]);
+  }, [product?.image, product?.image_url, product?.image_urls]);
 
   const imageUrl =
-    product?.image_url ||
+    product?.image || product?.image_url ||
     (Array.isArray(product?.image_urls)
       ? product.image_urls[0]
       : "");
@@ -94,7 +94,7 @@ function ProductImage({ product }) {
   if (imageUrl && !imageError) {
     const finalImageUrl =
       imageUrl.startsWith("http://") ||
-      imageUrl.startsWith("https://")
+      imageUrl.startsWith("https://") || imageUrl.startsWith("data:")
         ? imageUrl
         : `${BACKEND_URL}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
 
