@@ -21,22 +21,22 @@ const categories = [
   {
     title: "Laptops",
     description: "Reliable laptops for work, study and everyday use.",
-    icon: "💻",
+    icon: "ð»",
   },
   {
     title: "Gaming Laptops",
     description: "Powerful machines built for gaming and performance.",
-    icon: "🎮",
+    icon: "ð®",
   },
   {
     title: "MacBooks",
     description: "Premium Apple laptops for work and creativity.",
-    icon: "",
+    icon: "ï£¿",
   },
   {
     title: "Laptop Accessories",
     description: "Everything you need to complete your setup.",
-    icon: "🎒",
+    icon: "ð",
   },
 ];
 
@@ -46,19 +46,19 @@ const categories = [
 
 const benefits = [
   {
-    icon: "✓",
+    icon: "â",
     title: "Quality Products",
     description:
       "Carefully selected laptops and accessories with quality in mind.",
   },
   {
-    icon: "↻",
+    icon: "â»",
     title: "Easy Returns",
     description:
       "A simple return process designed to give you complete peace of mind.",
   },
   {
-    icon: "🚚",
+    icon: "ð",
     title: "Fast Delivery",
     description:
       "Get your products delivered safely and conveniently across Pakistan.",
@@ -195,7 +195,7 @@ function PopularProductImage({ product }) {
 
   return (
     <span className="product-emoji">
-      💻
+      ð»
     </span>
   );
 }
@@ -203,6 +203,23 @@ function PopularProductImage({ product }) {
 // ============================================================
 // HOME
 // ============================================================
+
+const DEFAULT_HERO = {
+  enabled: true,
+  badge: "PREMIUM LAPTOPS & ACCESSORIES",
+  title: "Technology That Fits Your World",
+  description:
+    "Discover reliable laptops, gaming machines and essential accessories for work, study, gaming and everyday life.",
+  primary_button_text: "View Products",
+  primary_button_link: "/products",
+  secondary_button_text: "Explore Categories",
+  secondary_button_link: "/categories",
+  image: "",
+  video_enabled: false,
+  video: "",
+  overlay_opacity: 0.78,
+  image_position: "center",
+};
 
 function Home() {
   // ==========================================================
@@ -214,6 +231,64 @@ function Home() {
 
   const [popularProductsLoading, setPopularProductsLoading] =
     useState(true);
+
+  // ==========================================================
+  // HERO SECTION (admin-managed)
+  // ==========================================================
+
+  const [hero, setHero] = useState(DEFAULT_HERO);
+
+  const [heroMedia, setHeroMedia] = useState("image");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchHero = async () => {
+      try {
+        const response = await fetch(`${API}/hero/public`);
+
+        if (!response.ok) {
+          throw new Error(
+            `Hero request failed with status ${response.status}`
+          );
+        }
+
+        const data = await response.json();
+
+        if (!isMounted) {
+          return;
+        }
+
+        const loadedHero = {
+          ...DEFAULT_HERO,
+          ...(data?.hero || {}),
+        };
+
+        setHero(loadedHero);
+
+        setHeroMedia(
+          loadedHero.video_enabled && loadedHero.video
+            ? "video"
+            : "image"
+        );
+      } catch (error) {
+        console.error(
+          "Error loading hero settings:",
+          error
+        );
+
+        if (isMounted) {
+          setHero(DEFAULT_HERO);
+        }
+      }
+    };
+
+    fetchHero();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // ==========================================================
   // FETCH ADMIN-SELECTED POPULAR PRODUCTS
@@ -303,45 +378,87 @@ function Home() {
           HERO
       ====================================================== */}
 
-      <section className="hero-section">
-        <div className="hero-overlay">
-          <div className="hero-content">
+      {hero.enabled && (
+        <section
+          className="hero-section"
+          style={{
+            backgroundImage:
+              heroMedia === "image" && hero.image
+                ? `url("${hero.image}")`
+                : undefined,
+            backgroundPosition:
+              hero.image_position || "center",
+          }}
+        >
+          {heroMedia === "video" &&
+            hero.video_enabled &&
+            hero.video && (
+              <video
+                className="hero-background-video"
+                src={hero.video}
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                onEnded={() => setHeroMedia("image")}
+                onError={() => setHeroMedia("image")}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            )}
 
-            <span className="hero-badge">
-              PREMIUM LAPTOPS & ACCESSORIES
-            </span>
+          <div
+            className="hero-overlay"
+            style={{
+              background: `rgba(0,0,0,${
+                Number.isFinite(Number(hero.overlay_opacity))
+                  ? Number(hero.overlay_opacity)
+                  : 0.78
+              })`,
+            }}
+          >
+            <div className="hero-content">
 
-            <h1>
-              Technology That Fits Your World
-            </h1>
+              {hero.badge && (
+                <span className="hero-badge">
+                  {hero.badge}
+                </span>
+              )}
 
-            <p>
-              Discover reliable laptops,
-              gaming machines and essential
-              accessories for work, study,
-              gaming and everyday life.
-            </p>
+              <h1>
+                {hero.title}
+              </h1>
 
-            <div className="hero-buttons">
+              <p>
+                {hero.description}
+              </p>
 
-              <a
-                href="/products"
-                className="primary-button"
-              >
-                View Products
-              </a>
+              <div className="hero-buttons">
 
-              <a
-                href="/categories"
-                className="secondary-button"
-              >
-                Explore Categories
-              </a>
+                <a
+                  href={hero.primary_button_link || "/products"}
+                  className="primary-button"
+                >
+                  {hero.primary_button_text || "View Products"}
+                </a>
 
+                <a
+                  href={hero.secondary_button_link || "/categories"}
+                  className="secondary-button"
+                >
+                  {hero.secondary_button_text || "Explore Categories"}
+                </a>
+
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ======================================================
           CATEGORY SECTION
@@ -392,7 +509,7 @@ function Home() {
                 </p>
 
                 <span className="card-link">
-                  View Products →
+                  View Products â
                 </span>
 
               </a>
@@ -502,7 +619,7 @@ function Home() {
 
                         <div className="product-rating">
 
-                          {"★★★★★"}
+                          {"âââââ"}
 
                           <span>
                             (
@@ -683,7 +800,7 @@ function Home() {
               >
 
                 <div className="testimonial-stars">
-                  {"★".repeat(
+                  {"â".repeat(
                     testimonial.rating
                   )}
                 </div>
@@ -736,19 +853,19 @@ function Home() {
         <div className="community-grid">
 
           <div className="community-box">
-            💻
+            ð»
           </div>
 
           <div className="community-box">
-            ⌨️
+            â¨ï¸
           </div>
 
           <div className="community-box">
-            🖱️
+            ð±ï¸
           </div>
 
           <div className="community-box">
-            🎧
+            ð§
           </div>
 
         </div>
