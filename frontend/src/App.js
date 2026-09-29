@@ -32,329 +32,335 @@ import AdminReviews from "./pages/AdminReviews/AdminReviews";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
 import AdminBlog from "./pages/AdminBlog/AdminBlog";
 import BlogPostDetails from "./pages/BlogPostDetails/BlogPostDetails";
+import AdminHero from "./pages/AdminHero/AdminHero";
+import AdminHeaderFooter from "./pages/AdminHeaderFooter/AdminHeaderFooter";
 
 import CustomerReviews from "./pages/CustomerReviews/CustomerReviews";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <CartProvider>
-          <WishlistProvider>
-            <Routes>
-
-              {/* =========================
-                  HOME
-              ========================== */}
-
-              <Route
-                path="/"
-                element={<Home />}
-              />
-
-
-              {/* =========================
-                  PRODUCTS
-              ========================== */}
-
-              <Route
-                path="/products"
-                element={<Products />}
-              />
-
-              <Route
-                path="/products/:id"
-                element={<ProductDetails />}
-              />
-
-
-              {/* =========================
-                  BLOGGING
-              ========================== */}
-
-              <Route
-                path="/blogging"
-                element={<Blogging />}
-              />
-
-              <Route
-                path="/blogging/:slug"
-                element={<BlogPostDetails />}
-              />
-
-
-              {/* =========================
-                  CATEGORIES
-              ========================== */}
-
-              <Route
-                path="/categories"
-                element={<Categories />}
-              />
-
-              <Route
-                path="/categories/hp"
-                element={<Categories />}
-              />
-
-              <Route
-                path="/categories/dell"
-                element={<Categories />}
-              />
-
-              <Route
-                path="/categories/lenovo"
-                element={<Categories />}
-              />
-
-              <Route
-                path="/categories/macbook"
-                element={<Categories />}
-              />
-
-
-              {/* =========================
-                  ABOUT
-              ========================== */}
-
-              <Route
-                path="/about"
-                element={<About />}
-              />
-
-
-              {/* =========================
-                  CONTACT
-              ========================== */}
-
-              <Route
-                path="/contact"
-                element={<Contact />}
-              />
-
-
-              {/* =========================
-                  CUSTOMER REVIEWS
-              ========================== */}
-
-              <Route
-                path="/reviews"
-                element={<CustomerReviews />}
-              />
-
-
-              {/* =========================
-                  CART
-              ========================== */}
-
-              <Route
-                path="/cart"
-                element={<Cart />}
-              />
-
-
-              {/* =========================
-                  WISHLIST
-              ========================== */}
-
-              <Route
-                path="/wishlist"
-                element={<Wishlist />}
-              />
-
-
-              {/* =========================
-                  CHECKOUT
-              ========================== */}
-
-              <Route
-                path="/checkout"
-                element={<Checkout />}
-              />
-
-
-              {/* =========================
-                  LOGIN
-              ========================== */}
-
-              <Route
-                path="/login"
-                element={<Login />}
-              />
-
-
-              {/* =========================
-                  REGISTER
-              ========================== */}
-
-              <Route
-                path="/register"
-                element={<Register />}
-              />
-
-
-              {/* =========================
-                  CUSTOMER ACCOUNT
-              ========================== */}
-
-              <Route
-                path="/account"
-                element={
-                  <ProtectedRoute>
-                    <Account />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  CUSTOMER ORDERS
-              ========================== */}
-
-              <Route
-                path="/orders"
-                element={
-                  <ProtectedRoute>
-                    <Orders />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN DASHBOARD
-              ========================== */}
-
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                }
-              />
-
-              <Route
-                path="/admin/dashboard"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN PRODUCTS
-              ========================== */}
-
-              <Route
-                path="/admin/products"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminProducts />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN ORDERS
-              ========================== */}
-
-              <Route
-                path="/admin/orders"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminOrders />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN CUSTOMER REVIEWS
-              ========================== */}
-
-              <Route
-                path="/admin/reviews"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminReviews />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN WHATSAPP
-              ========================== */}
-
-              <Route
-                path="/admin/whatsapp"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminWhatsApp />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN THEME
-              ========================== */}
-
-              <Route
-                path="/admin/theme"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminTheme />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN USERS
-              ========================== */}
-
-              <Route
-                path="/admin/users"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminUsers />
-                  </ProtectedRoute>
-                }
-              />
-
-
-              {/* =========================
-                  ADMIN BLOG
-              ========================== */}
-
-              <Route
-                path="/admin/blog"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminBlog />
-                  </ProtectedRoute>
-                }
-              />
-
-            </Routes>
-
-
-            {/* =========================
-                FLOATING WHATSAPP
-            ========================== */}
-
-            <FloatingWhatsApp />
-
-          </WishlistProvider>
-        </CartProvider>
-      </ThemeProvider>
-    </BrowserRouter>
-  );
+return (
+<BrowserRouter>
+<ThemeProvider>
+<CartProvider>
+<WishlistProvider>
+<Routes>
+
+{/* =========================
+HOME
+========================== */}
+
+<Route
+path="/"
+element={<Home />}
+/>
+
+{/* =========================
+PRODUCTS
+========================== */}
+
+<Route
+path="/products"
+element={<Products />}
+/>
+
+<Route
+path="/products/:id"
+element={<ProductDetails />}
+/>
+
+{/* =========================
+BLOGGING
+========================== */}
+
+<Route
+path="/blogging"
+element={<Blogging />}
+/>
+
+<Route
+path="/blogging/:slug"
+element={<BlogPostDetails />}
+/>
+
+{/* =========================
+CATEGORIES
+========================== */}
+
+<Route
+path="/categories"
+element={<Categories />}
+/>
+
+<Route
+path="/categories/hp"
+element={<Categories />}
+/>
+
+<Route
+path="/categories/dell"
+element={<Categories />}
+/>
+
+<Route
+path="/categories/lenovo"
+element={<Categories />}
+/>
+
+<Route
+path="/categories/macbook"
+element={<Categories />}
+/>
+
+{/* =========================
+ABOUT
+========================== */}
+
+<Route
+path="/about"
+element={<About />}
+/>
+
+{/* =========================
+CONTACT
+========================== */}
+
+<Route
+path="/contact"
+element={<Contact />}
+/>
+
+{/* =========================
+CUSTOMER REVIEWS
+========================== */}
+
+<Route
+path="/reviews"
+element={<CustomerReviews />}
+/>
+
+{/* =========================
+CART
+========================== */}
+
+<Route
+path="/cart"
+element={<Cart />}
+/>
+
+{/* =========================
+WISHLIST
+========================== */}
+
+<Route
+path="/wishlist"
+element={<Wishlist />}
+/>
+
+{/* =========================
+CHECKOUT
+========================== */}
+
+<Route
+path="/checkout"
+element={<Checkout />}
+/>
+
+{/* =========================
+LOGIN
+========================== */}
+
+<Route
+path="/login"
+element={<Login />}
+/>
+
+{/* =========================
+REGISTER
+========================== */}
+
+<Route
+path="/register"
+element={<Register />}
+/>
+
+{/* =========================
+CUSTOMER ACCOUNT
+========================== */}
+
+<Route
+path="/account"
+element={
+<ProtectedRoute>
+<Account />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+CUSTOMER ORDERS
+========================== */}
+
+<Route
+path="/orders"
+element={
+<ProtectedRoute>
+<Orders />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN DASHBOARD
+========================== */}
+
+<Route
+path="/admin"
+element={
+<ProtectedRoute adminOnly>
+<AdminDashboard />
+</ProtectedRoute>
+}
+/>
+
+<Route
+path="/admin/dashboard"
+element={
+<ProtectedRoute adminOnly>
+<AdminDashboard />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN PRODUCTS
+========================== */}
+
+<Route
+path="/admin/products"
+element={
+<ProtectedRoute adminOnly>
+<AdminProducts />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN ORDERS
+========================== */}
+
+<Route
+path="/admin/orders"
+element={
+<ProtectedRoute adminOnly>
+<AdminOrders />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN CUSTOMER REVIEWS
+========================== */}
+
+<Route
+path="/admin/reviews"
+element={
+<ProtectedRoute adminOnly>
+<AdminReviews />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN WHATSAPP
+========================== */}
+
+<Route
+path="/admin/whatsapp"
+element={
+<ProtectedRoute adminOnly>
+<AdminWhatsApp />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN THEME
+========================== */}
+
+<Route
+path="/admin/theme"
+element={
+<ProtectedRoute adminOnly>
+<AdminTheme />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN USERS
+========================== */}
+
+<Route
+path="/admin/users"
+element={
+<ProtectedRoute adminOnly>
+<AdminUsers />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN BLOG
+========================== */}
+
+<Route
+path="/admin/blog"
+element={
+<ProtectedRoute adminOnly>
+<AdminBlog />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN HERO
+========================== */}
+
+<Route
+path="/admin/hero"
+element={
+<ProtectedRoute adminOnly>
+<AdminHero />
+</ProtectedRoute>
+}
+/>
+
+{/* =========================
+ADMIN HEADER & FOOTER
+========================== */}
+
+<Route
+path="/admin/header-footer"
+element={
+<ProtectedRoute adminOnly>
+<AdminHeaderFooter />
+</ProtectedRoute>
+}
+/>
+
+</Routes>
+
+{/* =========================
+FLOATING WHATSAPP
+========================== */}
+
+<FloatingWhatsApp />
+
+</WishlistProvider>
+</CartProvider>
+</ThemeProvider>
+</BrowserRouter>
+);
 }
 
 export default App;
